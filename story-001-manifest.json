@@ -1,0 +1,162 @@
+{
+  "format": "b5-sst-story",
+  "schemaVersion": "1.0",
+  "storyId": "story-001",
+  "version": "0.9.0",
+  "minPlayerVersion": "0.10.0",
+  "guardrailVersion": "1.2",
+  "title": "ゆうとの どきどき 月曜日",
+  "titleRuby": "ゆうとの どきどき [[月曜日|げつようび]]",
+  "status": "candidate",
+  "target": "小学生",
+  "coverAsset": "assets/intro-home.webp",
+  "content": "第1話。5つのSSTを一日の物語として進め、本編終了後に別場面で振り返り・確認を行う。",
+  "assetPolicy": "json-and-media-only",
+  "files": {
+    "story.json": {
+      "sha256": "be89abb877c90f70415377d484af5e165f6537cb4d63d95c52b1a94e26f85c93",
+      "bytes": 66692
+    },
+    "assets/class-a-strong.webp": {
+      "sha256": "1505f3db2667e18b7f8405b4157e51b60b9e6a5874af7d839991bd405ec643fd",
+      "bytes": 117336
+    },
+    "assets/class-b-good.webp": {
+      "sha256": "28b85207aaa110509167c40191b6d71b54872b7686bd46eaf515abf33956df99",
+      "bytes": 94296
+    },
+    "assets/class-c-silent.webp": {
+      "sha256": "92c22bccb2925658f43fcc56299e73d988635e710ad0717cf0f15f1f5ae7bfda",
+      "bytes": 80556
+    },
+    "assets/class-d-wait.webp": {
+      "sha256": "839d5251b27ad8f200efd9a366645ff69ff40cfbea5565e30c03856f35d31b0b",
+      "bytes": 122860
+    },
+    "assets/class-e-nod.webp": {
+      "sha256": "acbcb9c08fa0800c12b6e851619a88d28cec11a84410a3dab7bb101cb80c96b8",
+      "bytes": 93314
+    },
+    "assets/evening-a-strong.webp": {
+      "sha256": "e2a588a389782727ba07452fc6d63aff6df3df5ac5459bcf1178ad9eda79da99",
+      "bytes": 142080
+    },
+    "assets/evening-b-good.webp": {
+      "sha256": "5f89a939479faa79cd2dd07797bbb7be8418982c6d2e3c5fd88d01c16072d549",
+      "bytes": 81746
+    },
+    "assets/evening-c-silent.webp": {
+      "sha256": "643b9dd3ce93e0d06843ed298ac672e516d81372e6f664f7f14e06247c6dc3f4",
+      "bytes": 67558
+    },
+    "assets/evening-d-wait.webp": {
+      "sha256": "45841a8ea1ad562bd2effaea635fc236a7a920eb7fd3217feb1e8f668da42b5f",
+      "bytes": 113574
+    },
+    "assets/evening-e-nod.webp": {
+      "sha256": "396e9c4377ed457bd544f00f82f3b2a459c2b54d18bd3a44fd4eff26f6d53bb9",
+      "bytes": 80892
+    },
+    "assets/general-a-angry.webp": {
+      "sha256": "ea88d0eb2e19465deb0c5d31be94c02648d9825be01eb6748925f26f9ca2d92e",
+      "bytes": 101198
+    },
+    "assets/general-b-go.webp": {
+      "sha256": "128ce3affa68527c9f7c2da3c19cbe04abc5735b2243f9cbab003d100f8aa1e7",
+      "bytes": 82042
+    },
+    "assets/general-c-silent.webp": {
+      "sha256": "e33716b53f0c83876551db9e3878526cadda46dfff1785ca66abcf00907ce3e9",
+      "bytes": 131344
+    },
+    "assets/general-d-wait.webp": {
+      "sha256": "c91f1d7484aa5b265384b4ba30d35cbdb1d92e89d4839b71471c502857e4dc59",
+      "bytes": 109752
+    },
+    "assets/general-e-nod.webp": {
+      "sha256": "a8be28d87f8d435cf79ab3b685adc8e1c735e86471c1cbeb64b4b381297acd85",
+      "bytes": 108656
+    },
+    "assets/general-school-intro.webp": {
+      "sha256": "1240680b8bc7f69b1d97c76e0544e2c293933f96a56c973567c3eb32d4260ba5",
+      "bytes": 125398
+    },
+    "assets/home-a-angry.webp": {
+      "sha256": "ac35fc1727f05d170dfb5cff0d8997412231594e4712987e6219e56b74fac386",
+      "bytes": 116584
+    },
+    "assets/home-b-go.webp": {
+      "sha256": "610d0d7db1832e4fb317e54cf7487ac6cb250c1c704ad9381340955010b1bdb2",
+      "bytes": 140898
+    },
+    "assets/home-c-silent.webp": {
+      "sha256": "92d6ce3ffa600ef7d0d36b2b4a40998f7a22bdb310adbde4fc797833cb36574b",
+      "bytes": 122268
+    },
+    "assets/home-d-wait.webp": {
+      "sha256": "66ab15661a161b6d8ae65d404a07b535ed50ea53e6c471c2245b299e68603462",
+      "bytes": 144260
+    },
+    "assets/home-e-nod.webp": {
+      "sha256": "55a1531a0e8f0150c86232b02b053fcdb22c0e8ee06eab5ade7a370da9e4fec8",
+      "bytes": 128106
+    },
+    "assets/intro-home.webp": {
+      "sha256": "f5d293e8ed904f56688da2ca7f9b15734a0e8bd68557389c682466d9957968e7",
+      "bytes": 99756
+    },
+    "assets/play-a-strong.webp": {
+      "sha256": "fdac97083db0c08d3f383b3cfbc63e9dbe750588f18a68293e2f54d370463d71",
+      "bytes": 244180
+    },
+    "assets/play-b-good.webp": {
+      "sha256": "d0fc6c0ad8e2c2537e4ecf435ec9749a53ff398311d72a531344701694f6f30b",
+      "bytes": 187348
+    },
+    "assets/play-c-silent.webp": {
+      "sha256": "51d9eccab520a72286615560616a40806de8dd83c381c01332ee6b29d42b7206",
+      "bytes": 157958
+    },
+    "assets/play-d-wait.webp": {
+      "sha256": "f7a74897a17858866926e8a514cd784798da127e4387ea51442966d62c2a1188",
+      "bytes": 253772
+    },
+    "assets/play-e-nod.webp": {
+      "sha256": "a755c35bf81233d0da60f90c641c20dd76295a6dc226af03f2232f10e52fc213",
+      "bytes": 186962
+    },
+    "assets/scene-02-school-entrance.webp": {
+      "sha256": "1240680b8bc7f69b1d97c76e0544e2c293933f96a56c973567c3eb32d4260ba5",
+      "bytes": 125398
+    },
+    "assets/scene-03-classroom.webp": {
+      "sha256": "8d8c0953cfa7b2e296dac98406c11db95d7b29f8e75ad526dcd63eca5017fa45",
+      "bytes": 96726
+    },
+    "assets/scene-04-playground.webp": {
+      "sha256": "f8e9f996a7b0f07279f8c45df552b5ccef422885e440dfaa58e35bfdf303d9f7",
+      "bytes": 194218
+    },
+    "assets/scene-05-home-evening.webp": {
+      "sha256": "8de0c79da0e8ebb7aac7117306402350531a9b0bcabd3b9f929b53e6a30fa3c2",
+      "bytes": 83810
+    },
+    "assets/transition-01-road.webp": {
+      "sha256": "a67ef37da9d6a50515cb56f0ede735cb9531ac712e13e16df1918f807d1919ab",
+      "bytes": 196992
+    },
+    "assets/transition-02-hallway.webp": {
+      "sha256": "88888183bc8d44271e5216355f98cadae3d49c126b4a4b24a14d2696e69ecb90",
+      "bytes": 167674
+    },
+    "assets/transition-03-yard.webp": {
+      "sha256": "b0573633e118cd75a5638268597e866b37caeb51c3b57d3dd050b3d696c76f90",
+      "bytes": 218540
+    },
+    "assets/transition-04-home.webp": {
+      "sha256": "db3c0996b11d211d85b220681b592732e06ecc367c08a5a5027f58d4b3a54137",
+      "bytes": 120752
+    }
+  },
+  "createdAt": "2026-09-05"
+}

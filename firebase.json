@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/*.md",
+      "story-001-manifest.json"
+    ],
+    "headers": [
+      {
+        "source": "**/*.@(js|css|html)",
+        "headers": [{"key":"Cache-Control","value":"public,max-age=300"}]
+      }
+    ]
+  }
+}

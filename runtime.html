@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#07101e">
+<title>B5 SST Player</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app" class="app">
+  <div id="bgA" class="bg active"></div><div id="bgB" class="bg"></div><div class="shade"></div>
+  <div id="rotateOverlay" class="rotate-overlay"><div class="rotate-card"><div class="rotate-icon">↻</div><div><ruby>画面<rt>がめん</rt></ruby>を<ruby>横向<rt>よこむ</rt></ruby>きにしてね</div></div></div>
+
+  <header class="topbar">
+    <div class="brand-block">
+      <div class="eyebrow">B5 SST STORY / <ruby>第<rt>だい</rt></ruby>1<ruby>話<rt>わ</rt></ruby></div>
+      <div class="mode-line"><span id="modeBadge" class="mode-badge story">ものがたり</span><span id="phaseLabel" class="phase-label">はじめに</span></div>
+      <div id="chapterDots" class="chapter-dots" aria-label="5つのSST"></div>
+    </div>
+    <div class="top-actions"><button id="libraryExitBtn" class="ghost small" type="button">いちらん</button>
+      <button id="readBtn" class="ghost small" type="button"><ruby>読<rt>よ</rt></ruby>み<ruby>上<rt>あ</rt></ruby>げ</button>
+      <button id="motionBtn" class="ghost small" type="button"><ruby>演出<rt>えんしゅつ</rt></ruby>：<ruby>標準<rt>ひょうじゅん</rt></ruby></button>
+      <button id="soundBtn" class="ghost small" type="button"><ruby>効果音<rt>こうかおん</rt></ruby>：あり</button>
+    </div>
+  </header>
+
+  <div id="b5Compass" class="b5-compass">
+    <span data-b5="look">1 みる</span><span data-b5="want">2 どうしたい？</span><span data-b5="tell">3 <ruby>伝<rt>つた</rt></ruby>える</span><span data-b5="other">4 <ruby>相手<rt>あいて</rt></ruby>をみる</span>
+  </div>
+
+  <main id="stage" class="stage">
+    <section id="startPanel" class="center-card">
+      <div class="kicker"><ruby>第<rt>だい</rt></ruby>1<ruby>話<rt>わ</rt></ruby></div>
+      <h1 id="storyTitle"></h1><p id="storySubtitle" class="lead"></p><p id="storyGoal" class="solo-note"></p>
+      <div class="story-route"><span><ruby>朝<rt>あさ</rt></ruby>の<ruby>家<rt>いえ</rt></ruby></span><i>→</i><span><ruby>学校<rt>がっこう</rt></ruby>の<ruby>玄関<rt>げんかん</rt></ruby></span><i>→</i><span><ruby>教室<rt>きょうしつ</rt></ruby></span><i>→</i><span><ruby>校庭<rt>こうてい</rt></ruby></span><i>→</i><span><ruby>夕方<rt>ゆうがた</rt></ruby>の<ruby>家<rt>いえ</rt></ruby></span></div>
+      <button id="startBtn" class="primary big" type="button"><ruby>物語<rt>ものがたり</rt></ruby>をはじめる</button>
+    </section>
+
+    <section id="goalPanel" class="panel wide hidden">
+      <div class="coach-chip">SSTのねらい</div><h2 id="goalTitle"></h2><div id="goalText" class="teaching-note"></div><div id="goalBenefit" class="benefit-box"></div><div id="goalFuture" class="future-mini"></div><button id="goalNext" class="primary" type="button"><ruby>場面<rt>ばめん</rt></ruby>を<ruby>見<rt>み</rt></ruby>る</button>
+    </section>
+
+    <section id="dialoguePanel" class="dialogue hidden" tabindex="0">
+      <div id="speaker" class="speaker"></div><div id="dialogueText" class="dialogue-text"></div><div id="tapHint" class="tap-hint"></div>
+    </section>
+
+    <section id="situationPanel" class="panel hidden">
+      <div class="coach-chip">コーチ：まず<ruby>状況<rt>じょうきょう</rt></ruby>を<ruby>見<rt>み</rt></ruby>る</div><h2 id="situationTitle"></h2><div id="situationGrid" class="choice-grid compact"></div><div id="situationFeedback" class="micro-feedback hidden"></div><button id="situationNext" class="primary hidden" type="button">つぎへ</button>
+    </section>
+
+    <section id="wantPanel" class="panel hidden">
+      <div class="coach-chip">コーチ：つぎに「どうしたい？」を<ruby>考<rt>かんが</rt></ruby>える</div><h2 id="wantTitle"></h2><div id="wantGrid" class="choice-grid compact"></div>
+    </section>
+
+    <section id="choicePanel" class="panel hidden">
+      <div id="choiceCoach" class="coach-chip"></div><h2 id="choiceTitle"></h2><div id="choiceGrid" class="choice-grid"></div>
+    </section>
+
+    <section id="reactionPanel" class="reaction-card hidden" tabindex="0">
+      <div class="reaction-tag"><ruby>選<rt>えら</rt></ruby>んだあとの<ruby>場面<rt>ばめん</rt></ruby></div><div id="pickedText" class="picked"></div><div class="speaker"><ruby>相手<rt>あいて</rt></ruby>の<ruby>反応<rt>はんのう</rt></ruby></div><div id="reactionText" class="reaction-text"></div><div class="look-cue"><ruby>言葉<rt>ことば</rt></ruby>だけでなく、<ruby>身体<rt>からだ</rt></ruby>の<ruby>向<rt>む</rt></ruby>き・<ruby>距離<rt>きょり</rt></ruby>・<ruby>動<rt>うご</rt></ruby>きも<ruby>見<rt>み</rt></ruby>よう。</div><button id="reactionNext" class="primary hidden" type="button"></button>
+    </section>
+
+    <section id="observePanel" class="panel hidden">
+      <div class="coach-chip">コーチ：<ruby>気持<rt>きも</rt></ruby>ちを<ruby>当<rt>あ</rt></ruby>てる<ruby>前<rt>まえ</rt></ruby>に、<ruby>見<rt>み</rt></ruby>えた<ruby>事実<rt>じじつ</rt></ruby>を<ruby>確<rt>たし</rt></ruby>かめる</div><h2><ruby>画面<rt>がめん</rt></ruby>では、<ruby>何<rt>なに</rt></ruby>が<ruby>起<rt>お</rt></ruby>きた？</h2><div id="observeGrid" class="choice-grid compact"></div><div id="observeFeedback" class="micro-feedback hidden"></div><button id="observeNext" class="primary hidden" type="button"><ruby>振<rt>ふ</rt></ruby>り<ruby>返<rt>かえ</rt></ruby>る</button>
+    </section>
+
+    <section id="reflectPanel" class="panel wide hidden">
+      <div class="coach-chip">コーチ：「したかったこと」と「<ruby>伝<rt>つた</rt></ruby>わったこと」を<ruby>比<rt>くら</rt></ruby>べる</div><div class="compare-grid"><div class="compare-box"><div class="compare-label">ゆうとの「どうしたい？」</div><div id="wantSummary" class="compare-main"></div></div><div class="arrow">→</div><div class="compare-box"><div class="compare-label"><ruby>相手<rt>あいて</rt></ruby>に<ruby>起<rt>お</rt></ruby>きたこと</div><div id="impactSummary" class="compare-main"></div></div></div><div id="specificFeedback" class="teaching-note"></div><button id="reflectNext" class="primary" type="button"></button>
+    </section>
+
+    <section id="repairChoicePanel" class="panel hidden">
+      <div class="coach-chip">コーチ：うまくいかなかったあとも、<ruby>立<rt>た</rt></ruby>て<ruby>直<rt>なお</rt></ruby>せる</div><h2><ruby>言<rt>い</rt></ruby>い<ruby>直<rt>なお</rt></ruby>すなら、どうする？</h2><div id="repairChoiceGrid" class="choice-grid compact"></div>
+    </section>
+
+    <section id="repairPanel" class="reaction-card hidden" tabindex="0">
+      <div class="reaction-tag"><ruby>立<rt>た</rt></ruby>て<ruby>直<rt>なお</rt></ruby>したあとの<ruby>場面<rt>ばめん</rt></ruby></div><div id="repairPicked" class="picked"></div><div id="repairReaction" class="reaction-text"></div><div class="look-cue"><ruby>相手<rt>あいて</rt></ruby>がすぐやさしくなるとは<ruby>限<rt>かぎ</rt></ruby>りません。やりとりが<ruby>前<rt>まえ</rt></ruby>に<ruby>進<rt>すす</rt></ruby>んだかを<ruby>見<rt>み</rt></ruby>ます。</div><button id="repairNext" class="primary hidden" type="button"></button>
+    </section>
+
+    <section id="modelPanel" class="panel wide hidden">
+      <div class="coach-chip">モデリング：<ruby>実際<rt>じっさい</rt></ruby>のやりとりで<ruby>見本<rt>みほん</rt></ruby>を<ruby>見<rt>み</rt></ruby>る</div><h2 id="modelTitle"></h2><div class="model-scene"><img id="modelImage" alt=""><div id="modelDialogue" class="model-dialogue"></div></div><div id="modelSteps" class="steps"></div><div id="modelExamples" class="model-examples"></div><button id="retryBtn" class="primary" type="button">こんどは<ruby>自分<rt>じぶん</rt></ruby>で<ruby>練習<rt>れんしゅう</rt></ruby>する</button>
+    </section>
+
+
+    <section id="reviewPanel" class="panel wide hidden">
+      <div class="review-chip"><ruby>物語<rt>ものがたり</rt></ruby>のあとにする <ruby>振<rt>ふ</rt></ruby>り<ruby>返<rt>かえ</rt></ruby>り・<ruby>確認<rt>かくにん</rt></ruby></div>
+      <h2>ゆうとの<ruby>月曜日<rt>げつようび</rt></ruby>を<ruby>最後<rt>さいご</rt></ruby>まで<ruby>見<rt>み</rt></ruby>ました</h2>
+      <p class="review-lead">ここからは<ruby>物語<rt>ものがたり</rt></ruby>とは<ruby>別<rt>べつ</rt></ruby>の<ruby>練習<rt>れんしゅう</rt></ruby>です。<ruby>今日<rt>きょう</rt></ruby>の5つを<ruby>思<rt>おも</rt></ruby>い<ruby>出<rt>だ</rt></ruby>して、<ruby>違<rt>ちが</rt></ruby>う<ruby>場面<rt>ばめん</rt></ruby>でどうするか<ruby>試<rt>ため</rt></ruby>します。</p>
+      <div id="reviewSkills" class="summary-cards five"></div>
+      <div class="review-note">「これは○○のSST」とは<ruby>書<rt>か</rt></ruby>きません。<ruby>場面<rt>ばめん</rt></ruby>を<ruby>見<rt>み</rt></ruby>て、<ruby>自分<rt>じぶん</rt></ruby>で<ruby>考<rt>かんが</rt></ruby>えます。</div>
+      <button id="reviewStart" class="primary" type="button"><ruby>違<rt>ちが</rt></ruby>う<ruby>場面<rt>ばめん</rt></ruby>で<ruby>試<rt>ため</rt></ruby>してみる</button>
+    </section>
+
+    <section id="generalizePanel" class="panel wide hidden">
+      <div id="reviewProgress" class="review-chip"></div><h2 id="generalizeTitle"><ruby>違<rt>ちが</rt></ruby>う<ruby>場面<rt>ばめん</rt></ruby>で、どうする？</h2><div id="generalizeIntro" class="teaching-note"></div><div id="generalizeGrid" class="choice-grid compact"></div>
+    </section>
+
+    <section id="generalizeReactionPanel" class="reaction-card hidden" tabindex="0">
+      <div class="reaction-tag">そのあとの<ruby>場面<rt>ばめん</rt></ruby></div><div id="generalizePicked" class="picked"></div><div id="generalizeReaction" class="reaction-text"></div><div id="generalizeFeedback" class="look-cue"></div><button id="generalizeNext" class="primary hidden" type="button"></button>
+    </section>
+
+    <section id="transitionPanel" class="dialogue transition-dialogue hidden" tabindex="0">
+      <div id="transitionKicker" class="story-tag"></div><div class="speaker">ナレーション</div><div id="transitionText" class="dialogue-text"></div><div id="transitionHint" class="tap-hint"></div>
+    </section>
+
+    <section id="endingPanel" class="panel wide hidden">
+      <div class="review-chip"><ruby>確認編<rt>かくにんへん</rt></ruby> おわり</div><h2>5つの<ruby>力<rt>ちから</rt></ruby>を、<ruby>違<rt>ちが</rt></ruby>う<ruby>場面<rt>ばめん</rt></ruby>でも<ruby>試<rt>ため</rt></ruby>しました</h2><div id="endingSkills" class="summary-cards five"></div><div class="future-card"><div class="future-kicker"><ruby>将来<rt>しょうらい</rt></ruby>へつながる<ruby>力<rt>ちから</rt></ruby></div><p><ruby>今日<rt>きょう</rt></ruby>の5つは、<ruby>大人<rt>おとな</rt></ruby>になって<ruby>働<rt>はたら</rt></ruby>くときの「<ruby>返事<rt>へんじ</rt></ruby>・チーム<ruby>参加<rt>さんか</rt></ruby>・<ruby>質問<rt>しつもん</rt></ruby>・<ruby>安全<rt>あんぜん</rt></ruby>・<ruby>相談<rt>そうだん</rt></ruby>」につながります。</p></div><h3><ruby>今日<rt>きょう</rt></ruby>、ほんとうの<ruby>生活<rt>せいかつ</rt></ruby>で1つだけ<ruby>試<rt>ため</rt></ruby>すなら？</h3><div id="missionGrid" class="choice-grid compact"></div><button id="missionSave" class="primary hidden" type="button">このミッションにする</button><button id="adultBtn" class="ghost" type="button"><ruby>大人<rt>おとな</rt></ruby><ruby>向<rt>む</rt></ruby>けの<ruby>学習記録<rt>がくしゅうきろく</rt></ruby></button><div id="adultRecord" class="adult-record hidden"></div>
+    </section>
+
+    <section id="savedPanel" class="center-card hidden"><div class="kicker"><ruby>現実<rt>げんじつ</rt></ruby>ミッション</div><h2 id="savedMission"></h2><p>チャンスがあったら1<ruby>回<rt>かい</rt></ruby>だけ<ruby>試<rt>ため</rt></ruby>します。うまくいかなくても、つぎの<ruby>練習<rt>れんしゅう</rt></ruby>の<ruby>材料<rt>ざいりょう</rt></ruby>になります。</p><button id="finishBtn" class="primary" type="button"><ruby>今日<rt>きょう</rt></ruby>はここまで</button></section>
+    <section id="returnPanel" class="center-card hidden"><div class="kicker"><ruby>前回<rt>ぜんかい</rt></ruby>の<ruby>現実<rt>げんじつ</rt></ruby>ミッション</div><h2 id="returnMission"></h2><h3>チャンスはあった？</h3><div id="returnGrid" class="choice-grid compact"></div><button id="skipReturn" class="ghost" type="button"><ruby>先<rt>さき</rt></ruby>に<ruby>物語<rt>ものがたり</rt></ruby>をする</button></section>
+    <section id="returnReflectPanel" class="panel wide hidden"><div class="coach-chip"><ruby>現実<rt>げんじつ</rt></ruby>で<ruby>起<rt>お</rt></ruby>きたことを<ruby>振<rt>ふ</rt></ruby>り<ruby>返<rt>かえ</rt></ruby>る</div><h2 id="returnQuestion"></h2><div id="returnReflectGrid" class="choice-grid compact"></div><button id="returnNext" class="primary hidden" type="button"><ruby>次<rt>つぎ</rt></ruby>へ</button></section>
+  </main>
+</div>
+<script src="ruby.js"></script><script>/*__STORY_BOOTSTRAP__*/</script><script src="game.js"></script><script>document.getElementById("libraryExitBtn")?.addEventListener("click",()=>parent.postMessage({type:"b5-sst-exit"},"*"));</script>
+</body>
+</html>
