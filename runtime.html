@@ -18,7 +18,7 @@
       <div class="mode-line"><span id="modeBadge" class="mode-badge story">ものがたり</span><span id="phaseLabel" class="phase-label">はじめに</span></div>
       <div id="chapterDots" class="chapter-dots" aria-label="5つのSST"></div>
     </div>
-    <div class="top-actions"><button id="libraryExitBtn" class="ghost small" type="button">いちらん</button>
+    <div class="top-actions"><button id="libraryExitBtn" class="ghost small library-exit-btn" type="button" aria-label="ストーリーいちらんにもどる"><span class="exit-label-wide">← いちらんにもどる</span><span class="exit-label-short">← いちらん</span></button>
       <button id="readBtn" class="ghost small" type="button"><ruby>読<rt>よ</rt></ruby>み<ruby>上<rt>あ</rt></ruby>げ</button>
       <button id="motionBtn" class="ghost small" type="button"><ruby>演出<rt>えんしゅつ</rt></ruby>：<ruby>標準<rt>ひょうじゅん</rt></ruby></button>
       <button id="soundBtn" class="ghost small" type="button"><ruby>効果音<rt>こうかおん</rt></ruby>：あり</button>
@@ -112,6 +112,21 @@
     <section id="returnReflectPanel" class="panel wide hidden"><div class="coach-chip"><ruby>現実<rt>げんじつ</rt></ruby>で<ruby>起<rt>お</rt></ruby>きたことを<ruby>振<rt>ふ</rt></ruby>り<ruby>返<rt>かえ</rt></ruby>る</div><h2 id="returnQuestion"></h2><div id="returnReflectGrid" class="choice-grid compact"></div><button id="returnNext" class="primary hidden" type="button"><ruby>次<rt>つぎ</rt></ruby>へ</button></section>
   </main>
 </div>
-<script src="ruby.js"></script><script>/*__STORY_BOOTSTRAP__*/</script><script src="game.js"></script><script>document.getElementById("libraryExitBtn")?.addEventListener("click",()=>parent.postMessage({type:"b5-sst-exit"},"*"));</script>
+<script src="ruby.js"></script><script>/*__STORY_BOOTSTRAP__*/</script><script src="game.js"></script><script>
+(() => {
+  const exitBtn = document.getElementById('libraryExitBtn');
+  if (!exitBtn) return;
+  exitBtn.addEventListener('click', () => {
+    const ok = window.confirm('ストーリーいちらんに もどりますか？\n\nいまの とちゅうの ばしょは ほぞんされません。');
+    if (!ok) return;
+    try { window.speechSynthesis?.cancel?.(); } catch (_) {}
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({type:'b5-sst-exit'}, '*');
+    } else {
+      window.location.href = 'index.html';
+    }
+  });
+})();
+</script>
 </body>
 </html>
