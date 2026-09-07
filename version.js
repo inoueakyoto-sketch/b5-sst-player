@@ -1,0 +1,1 @@
+window.B5_PLAYER_VERSION='0.10.4';

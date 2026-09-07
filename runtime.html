@@ -14,7 +14,7 @@
 
   <header class="topbar">
     <div class="brand-block">
-      <div class="eyebrow">B5 SST STORY / <ruby>第<rt>だい</rt></ruby>1<ruby>話<rt>わ</rt></ruby></div>
+      <div class="runtime-meta-row"><div class="eyebrow">B5 SST STORY / <span id="storyEpisodeLabel"></span></div><div class="runtime-version"><span id="playerVersionRuntime" class="player-version-mini"></span><span id="storyVersionMini" class="story-version-mini"></span></div></div>
       <div class="mode-line"><span id="modeBadge" class="mode-badge story">ものがたり</span><span id="phaseLabel" class="phase-label">はじめに</span></div>
       <div id="chapterDots" class="chapter-dots" aria-label="5つのSST"></div>
     </div>
@@ -31,14 +31,23 @@
 
   <main id="stage" class="stage">
     <section id="startPanel" class="center-card">
-      <div class="kicker"><ruby>第<rt>だい</rt></ruby>1<ruby>話<rt>わ</rt></ruby></div>
+      <div id="storyEpisodeKicker" class="kicker"></div>
       <h1 id="storyTitle"></h1><p id="storySubtitle" class="lead"></p><p id="storyGoal" class="solo-note"></p>
-      <div class="story-route"><span><ruby>朝<rt>あさ</rt></ruby>の<ruby>家<rt>いえ</rt></ruby></span><i>→</i><span><ruby>学校<rt>がっこう</rt></ruby>の<ruby>玄関<rt>げんかん</rt></ruby></span><i>→</i><span><ruby>教室<rt>きょうしつ</rt></ruby></span><i>→</i><span><ruby>校庭<rt>こうてい</rt></ruby></span><i>→</i><span><ruby>夕方<rt>ゆうがた</rt></ruby>の<ruby>家<rt>いえ</rt></ruby></span></div>
+      <div id="storyRoute" class="story-route"><span><ruby>朝<rt>あさ</rt></ruby>の<ruby>家<rt>いえ</rt></ruby></span><i>→</i><span><ruby>学校<rt>がっこう</rt></ruby>の<ruby>玄関<rt>げんかん</rt></ruby></span><i>→</i><span><ruby>教室<rt>きょうしつ</rt></ruby></span><i>→</i><span><ruby>校庭<rt>こうてい</rt></ruby></span><i>→</i><span><ruby>夕方<rt>ゆうがた</rt></ruby>の<ruby>家<rt>いえ</rt></ruby></span></div>
       <button id="startBtn" class="primary big" type="button"><ruby>物語<rt>ものがたり</rt></ruby>をはじめる</button>
     </section>
 
     <section id="goalPanel" class="panel wide coach-large-panel goal-panel hidden">
-      <div class="coach-chip">SSTのねらい</div><h2 id="goalTitle"></h2><div id="goalText" class="teaching-note"></div><div id="goalBenefit" class="benefit-box"></div><div id="goalFuture" class="future-mini"></div><button id="goalNext" class="primary" type="button"><ruby>場面<rt>ばめん</rt></ruby>を<ruby>見<rt>み</rt></ruby>る</button>
+      <div class="goal-learning-card">
+        <div class="goal-learning-label">これから<ruby>学<rt>まな</rt></ruby>ぶこと</div>
+        <div id="goalText" class="goal-learning-text"></div>
+      </div>
+      <div class="goal-topic-row"><div class="coach-chip">このSSTのテーマ</div><h2 id="goalTitle"></h2></div>
+      <div class="goal-support-grid">
+        <div class="goal-support-card benefit-card"><div class="goal-support-label">なぜ<ruby>大切<rt>たいせつ</rt></ruby>？</div><div id="goalBenefit" class="benefit-box"></div></div>
+        <div class="goal-support-card future-card-mini"><div class="goal-support-label"><ruby>将来<rt>しょうらい</rt></ruby>どこで<ruby>使<rt>つか</rt></ruby>う？</div><div id="goalFuture" class="future-mini"></div></div>
+      </div>
+      <button id="goalNext" class="primary goal-next-primary" type="button">このねらいで<ruby>場面<rt>ばめん</rt></ruby>を<ruby>見<rt>み</rt></ruby>る</button>
     </section>
 
     <section id="dialoguePanel" class="dialogue hidden" tabindex="0">
@@ -84,7 +93,7 @@
 
     <section id="reviewPanel" class="panel wide hidden">
       <div class="review-chip"><ruby>物語<rt>ものがたり</rt></ruby>のあとにする <ruby>振<rt>ふ</rt></ruby>り<ruby>返<rt>かえ</rt></ruby>り・<ruby>確認<rt>かくにん</rt></ruby></div>
-      <h2>ゆうとの<ruby>月曜日<rt>げつようび</rt></ruby>を<ruby>最後<rt>さいご</rt></ruby>まで<ruby>見<rt>み</rt></ruby>ました</h2>
+      <h2 id="reviewHeading"></h2>
       <p class="review-lead">ここからは<ruby>物語<rt>ものがたり</rt></ruby>とは<ruby>別<rt>べつ</rt></ruby>の<ruby>練習<rt>れんしゅう</rt></ruby>です。<ruby>今日<rt>きょう</rt></ruby>の5つを<ruby>思<rt>おも</rt></ruby>い<ruby>出<rt>だ</rt></ruby>して、<ruby>違<rt>ちが</rt></ruby>う<ruby>場面<rt>ばめん</rt></ruby>でどうするか<ruby>試<rt>ため</rt></ruby>します。</p>
       <div id="reviewSkills" class="summary-cards five"></div>
       <div class="review-note">「これは○○のSST」とは<ruby>書<rt>か</rt></ruby>きません。<ruby>場面<rt>ばめん</rt></ruby>を<ruby>見<rt>み</rt></ruby>て、<ruby>自分<rt>じぶん</rt></ruby>で<ruby>考<rt>かんが</rt></ruby>えます。</div>
@@ -112,7 +121,7 @@
     <section id="returnReflectPanel" class="panel wide hidden"><div class="coach-chip"><ruby>現実<rt>げんじつ</rt></ruby>で<ruby>起<rt>お</rt></ruby>きたことを<ruby>振<rt>ふ</rt></ruby>り<ruby>返<rt>かえ</rt></ruby>る</div><h2 id="returnQuestion"></h2><div id="returnReflectGrid" class="choice-grid compact"></div><button id="returnNext" class="primary hidden" type="button"><ruby>次<rt>つぎ</rt></ruby>へ</button></section>
   </main>
 </div>
-<script src="ruby.js"></script><script>/*__STORY_BOOTSTRAP__*/</script><script src="game.js"></script><script>
+<script src="version.js"></script><script src="ruby.js"></script><script>/*__STORY_BOOTSTRAP__*/</script><script src="game.js"></script><script>
 (() => {
   const exitBtn = document.getElementById('libraryExitBtn');
   if (!exitBtn) return;

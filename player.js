@@ -1,6 +1,6 @@
 (() => {
 'use strict';
-const $=id=>document.getElementById(id), listEl=$('storyList'), empty=$('empty'), status=$('status'), file=$('storyFile'), lib=$('library'), wrap=$('gameWrap'), frame=$('gameFrame');let active=null;
+const $=id=>document.getElementById(id), PLAYER_VERSION=window.B5_PLAYER_VERSION||'unknown', listEl=$('storyList'), empty=$('empty'), status=$('status'), file=$('storyFile'), lib=$('library'), wrap=$('gameWrap'), frame=$('gameFrame');let active=null;
 const fmt=n=>n<1024*1024?`${Math.round(n/1024)} KB`:`${(n/1024/1024).toFixed(1)} MB`;
 function msg(t,type=''){status.className='library-status '+type;window.SSTRuby?.set(status,t)|| (status.textContent=t)}
 function storyTitle(rec){return window.SSTRuby?window.SSTRuby.html(rec.titleRuby||rec.title):rec.title}
@@ -8,5 +8,5 @@ async function render(){const rows=(await B5StoryStore.list()).sort((a,b)=>a.sto
 async function importSelected(){const f=file.files?.[0];if(!f)return;msg('ストーリーをチェックしています…');try{const x=await B5StoryStore.importFile(f);msg(x.replaced?`ストーリーをこうしんしました（${x.oldVersion} → ${x.manifest.version}）。`:'ストーリーをついかしました。','ok');await render()}catch(e){console.error(e);msg(`よみこめませんでした：${e.message}`,'err')}finally{file.value=''}}
 async function play(id){msg('ストーリーをひらいています…');try{active?.revoke?.();active=await B5StoryStore.load(id);const template=await (await fetch('runtime.html',{cache:'no-store'})).text();const base=new URL('.',location.href).href;const json=JSON.stringify(active.story).replace(/</g,'\\u003c').replace(/>/g,'\\u003e').replace(/&/g,'\\u0026');const boot=`window.SST_STORY=${json};`;const src=template.replace('<head>','<head><base href="'+base+'">').replace('/*__STORY_BOOTSTRAP__*/',boot);frame.srcdoc=src;lib.classList.add('hidden-shell');wrap.classList.remove('hidden-shell');document.body.classList.remove('library-open')}catch(e){console.error(e);msg(`ひらけませんでした：${e.message}`,'err')}}
 function exitGame(){frame.srcdoc='';wrap.classList.add('hidden-shell');lib.classList.remove('hidden-shell');document.body.classList.add('library-open');active?.revoke?.();active=null;msg('ストーリーいちらんにもどりました。','ok');render()}
-$('importBtn').onclick=()=>file.click();file.onchange=importSelected;window.addEventListener('message',e=>{if(e.data?.type==='b5-sst-exit')exitGame()});window.B5PlayerQA={play,exitGame,render,importBlob:B5StoryStore.importBlob};msg('ストーリーパックをえらんでください。');render();
+const versionEl=$('playerVersionLibrary');if(versionEl)versionEl.textContent=`Player v${PLAYER_VERSION}`;$('importBtn').onclick=()=>file.click();file.onchange=importSelected;window.addEventListener('message',e=>{if(e.data?.type==='b5-sst-exit')exitGame()});window.B5PlayerQA={play,exitGame,render,importBlob:B5StoryStore.importBlob};msg('ストーリーパックをえらんでください。');render();
 })();
