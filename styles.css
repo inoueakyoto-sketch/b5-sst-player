@@ -44,3 +44,82 @@ body.library-open{overflow:hidden;background:#07101e}
 
 /* v0.10.1: story exit/navigation */
 @media(orientation:landscape) and (max-height:520px){.exit-label-wide{display:none}.exit-label-short{display:inline}.library-exit-btn{padding-left:7px;padding-right:7px}}
+
+
+/* v0.10.2: 第1話のSSTねらい・解説を大きくし、相手の反応とコーチ解説を分離 */
+.app[data-ui-mode="coach"] .panel.coach-large-panel{
+  top:12vh;
+  bottom:auto;
+  width:min(1180px,95vw);
+  max-height:84vh;
+  padding:26px 30px 28px;
+}
+.app[data-ui-mode="coach"] .panel.coach-large-panel.wide{width:min(1260px,96vw)}
+.panel.coach-large-panel h2{font-size:clamp(28px,3vw,42px);line-height:1.42;margin-bottom:12px}
+.panel.coach-large-panel .coach-chip{font-size:13px;padding:6px 11px;margin-bottom:10px}
+.panel.coach-large-panel .choice{font-size:16px;min-height:62px;padding:13px 15px}
+.panel.coach-large-panel .micro-feedback{font-size:15px;line-height:1.65;padding:12px 14px}
+.goal-panel .coach-chip{font-size:14px;padding:7px 13px}
+.goal-panel h2{font-size:clamp(32px,3.4vw,48px);margin-bottom:14px}
+.goal-panel .teaching-note{font-size:clamp(18px,1.55vw,22px);line-height:1.78;padding:16px 18px;margin:12px 0 14px}
+.goal-panel .benefit-box{font-size:clamp(17px,1.4vw,20px);line-height:1.75;padding:15px 18px;margin:12px 0 14px}
+.goal-panel .future-mini{font-size:clamp(14px,1.15vw,17px);line-height:1.65;padding:10px 13px;margin-bottom:16px}
+.goal-panel .primary{font-size:16px;min-height:50px;padding:12px 20px}
+#situationNext,#observeNext{display:block;margin-top:16px;margin-bottom:2px}
+
+/* セリフ/相手の反応は物語画面の下部に置き、解説は次画面のSSTコーチへ分ける */
+.app[data-ui-mode="story"] .reaction-card{
+  left:3.5vw;
+  right:3.5vw;
+  top:auto;
+  bottom:3.2vh;
+  transform:none;
+  width:auto;
+  max-height:42vh;
+  padding:20px 26px 22px;
+  background:linear-gradient(180deg,rgba(4,12,24,.88),rgba(3,9,19,.97));
+  border:1px solid rgba(255,255,255,.16);
+  border-top:3px solid rgba(164,206,239,.75);
+  border-radius:19px;
+  box-shadow:0 16px 50px rgba(0,0,0,.4);
+}
+.app[data-ui-mode="story"] .reaction-card .reaction-tag,
+.app[data-ui-mode="story"] .reaction-card .picked,
+.app[data-ui-mode="story"] .reaction-card .look-cue{display:none}
+.app[data-ui-mode="story"] .reaction-card .speaker{font-size:16px;margin-bottom:7px}
+.app[data-ui-mode="story"] .reaction-card .reaction-text{font-size:clamp(18px,1.85vw,25px);line-height:1.66}
+.app[data-ui-mode="story"] .reaction-card .primary{margin-top:12px;min-height:44px;padding:10px 16px}
+
+@media(orientation:landscape) and (max-height:520px){
+  .app[data-ui-mode="coach"] .panel.coach-large-panel,
+  .app[data-ui-mode="coach"] .panel.coach-large-panel.wide{
+    top:58px;
+    width:96vw;
+    max-height:calc(100dvh - 62px);
+    padding:12px 16px 14px;
+  }
+  .panel.coach-large-panel h2{font-size:20px;line-height:1.35;margin-bottom:5px}
+  .panel.coach-large-panel .coach-chip{font-size:9px;padding:3px 7px;margin-bottom:4px}
+  .panel.coach-large-panel .choice{font-size:12px;min-height:44px;padding:7px 9px}
+  .panel.coach-large-panel .micro-feedback{font-size:10.5px;line-height:1.4;padding:7px 9px}
+  .goal-panel h2{font-size:24px;margin-bottom:6px}
+  .goal-panel .coach-chip{font-size:10px;padding:4px 8px}
+  .goal-panel .teaching-note{font-size:12px;line-height:1.45;padding:8px 10px;margin:5px 0 6px}
+  .goal-panel .benefit-box{font-size:11px;line-height:1.4;padding:7px 9px;margin:5px 0 6px}
+  .goal-panel .future-mini{font-size:9.5px;line-height:1.35;padding:5px 7px;margin-bottom:7px}
+  .goal-panel .primary{font-size:11px;min-height:36px;padding:6px 12px}
+  #situationNext,#observeNext{margin-top:9px}
+  .app[data-ui-mode="story"] .reaction-card{
+    left:2.5vw;
+    right:2.5vw;
+    top:auto;
+    bottom:1.5vh;
+    width:auto;
+    max-height:43vh;
+    padding:10px 14px 12px;
+    transform:none;
+  }
+  .app[data-ui-mode="story"] .reaction-card .speaker{font-size:11px;margin-bottom:3px}
+  .app[data-ui-mode="story"] .reaction-card .reaction-text{font-size:14px;line-height:1.43}
+  .app[data-ui-mode="story"] .reaction-card .primary{min-height:34px;padding:5px 10px;margin-top:6px;font-size:10px}
+}
