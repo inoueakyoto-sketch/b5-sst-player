@@ -257,3 +257,207 @@ body.library-open{overflow:hidden;background:#07101e}
   .app[data-density="focus"] #modelExamplesBlock .model-examples{grid-template-columns:1fr}
   .app[data-density="focus"] .ending-pair{grid-template-columns:repeat(2,minmax(0,1fr));margin:7px auto}
 }
+
+/* v0.10.7: readability + collision hardening + stronger narration/dialogue separation */
+:root{
+  --story-narration-text:#8fd5ff;
+  --story-dialogue-text:#ffffff;
+  --story-thought-text:#e4cfff;
+}
+
+/* Buttons must grow with ruby/long labels instead of clipping or covering text. */
+button,.primary,.ghost,.choice,.library-btn{
+  height:auto;
+  min-width:0;
+  max-width:100%;
+  line-height:1.42;
+  white-space:normal;
+  overflow-wrap:anywhere;
+  word-break:normal;
+  text-wrap:pretty;
+}
+.primary{font-size:clamp(15px,1.25vw,18px);min-height:50px;padding:12px 18px}
+.ghost{line-height:1.35}
+.small{font-size:clamp(10px,.85vw,12px);min-height:40px;padding:7px 10px}
+
+/* Generated answer buttons use a true two-column layout so the number badge cannot collide with text. */
+.choice{
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr);
+  align-items:start;
+  column-gap:10px;
+  row-gap:5px;
+  font-size:clamp(16px,1.35vw,19px);
+  line-height:1.55;
+  min-height:64px;
+  padding:13px 15px;
+}
+.choice .num{margin:1px 0 0;align-self:start}
+.choice>span:last-child{min-width:0}
+.choice.seen::after{
+  position:static;
+  grid-column:2;
+  justify-self:end;
+  align-self:end;
+  display:inline-flex;
+  width:max-content;
+  margin-top:1px;
+  font-size:11px;
+  line-height:1.2;
+  padding:3px 8px;
+}
+
+/* Keep navigation in normal flow; it may wrap but must never cover teaching text. */
+.task-page-nav{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(210px,max-content);
+  align-items:end;
+  gap:14px 18px;
+  margin-top:20px;
+  padding-top:4px;
+}
+.task-page-nav .primary{margin:0;justify-self:end;max-width:min(430px,100%)}
+.task-page-indicator{font-size:clamp(13px,1vw,15px);line-height:1.4;align-self:center}
+#situationNext,#observeNext{position:static;margin-top:18px;max-width:100%}
+
+/* Keep the coach panel clear of the top progress controls. */
+.b5-compass{top:82px}
+.app[data-ui-mode="coach"] .panel,
+.app[data-ui-mode="review"] .panel,
+.app[data-ui-mode="coach"] .panel.coach-large-panel,
+.app[data-ui-mode="coach"] .panel.coach-large-panel.wide{
+  top:124px;
+  bottom:auto;
+  max-height:calc(100dvh - 142px);
+  overflow:auto;
+  padding-bottom:24px;
+}
+.app[data-ui-mode="coach"] .reaction-card,
+.app[data-ui-mode="review"] .reaction-card{
+  top:124px;
+  max-height:calc(100dvh - 142px);
+}
+
+/* Larger instructional typography. */
+.panel h2,.panel.coach-large-panel h2{font-size:clamp(27px,2.65vw,39px);line-height:1.48}
+.panel h3{font-size:clamp(19px,1.55vw,24px);line-height:1.45}
+.panel.coach-large-panel .coach-chip,.coach-chip,.review-chip,.task-block-label{font-size:clamp(12px,1vw,14px);line-height:1.35}
+.panel.coach-large-panel .choice{font-size:clamp(16px,1.4vw,20px);min-height:66px}
+.micro-feedback{font-size:clamp(15px,1.2vw,18px);line-height:1.7}
+.compare-label{font-size:clamp(13px,1vw,15px)}
+.compare-main{font-size:clamp(18px,1.45vw,22px);line-height:1.7}
+.teaching-note{font-size:clamp(17px,1.35vw,20px);line-height:1.76;padding:15px 17px}
+.steps>div{min-height:66px;padding:13px 15px;align-items:flex-start}
+.steps b{flex:0 0 34px;height:34px;font-size:15px}
+.steps span{font-size:clamp(17px,1.35vw,20px);line-height:1.55}
+.model-examples div{font-size:clamp(17px,1.35vw,20px);line-height:1.62;padding:13px 15px}
+.model-line .who{font-size:clamp(13px,1vw,15px)}
+.model-line .say{font-size:clamp(17px,1.35vw,20px);line-height:1.62}
+.summary-cards b{font-size:clamp(13px,1vw,15px)}
+.summary-cards span{font-size:clamp(16px,1.25vw,19px);line-height:1.55}
+.future-card p{font-size:clamp(17px,1.35vw,20px);line-height:1.72}
+.future-kicker{font-size:clamp(13px,1vw,15px)}
+.review-lead,.app[data-density="focus"] #reviewPanel .review-lead{font-size:clamp(17px,1.4vw,21px);line-height:1.75}
+.goal-support-label{font-size:clamp(13px,1vw,15px)}
+.goal-panel .benefit-box{font-size:clamp(18px,1.45vw,21px);line-height:1.75}
+.goal-panel .future-mini{font-size:clamp(17px,1.35vw,20px);line-height:1.7}
+
+/* Story reading: the text itself—not only the label/background—changes by semantic role. */
+.app[data-ui-mode="story"] .dialogue.story-line--narration .dialogue-text,
+.app[data-ui-mode="story"] .transition-dialogue.story-line--narration .dialogue-text{
+  color:var(--story-narration-text)!important;
+  font-size:clamp(23px,2.05vw,31px);
+  font-weight:800;
+  line-height:1.72;
+}
+.app[data-ui-mode="story"] .dialogue.story-line--dialogue .dialogue-text,
+.app[data-ui-mode="story"] .transition-dialogue.story-line--dialogue .dialogue-text{
+  color:var(--story-dialogue-text)!important;
+  font-size:clamp(23px,2.05vw,31px);
+  font-weight:850;
+  line-height:1.72;
+}
+.app[data-ui-mode="story"] .dialogue.story-line--thought .dialogue-text,
+.app[data-ui-mode="story"] .transition-dialogue.story-line--thought .dialogue-text{
+  color:var(--story-thought-text)!important;
+  font-size:clamp(22px,1.95vw,29px);
+  font-weight:800;
+  line-height:1.72;
+}
+.app[data-ui-mode="story"] .dialogue .speaker{font-size:clamp(15px,1.2vw,18px);line-height:1.3}
+.app[data-ui-mode="story"] .dialogue.story-line--narration .speaker{color:#bfe8ff}
+.app[data-ui-mode="story"] .dialogue.story-line--dialogue .speaker{color:#ffd77f}
+.app[data-ui-mode="story"] .dialogue.story-line--thought .speaker{color:#e7d7ff}
+.app[data-ui-mode="story"] .dialogue{padding-bottom:28px}
+.tap-hint{position:static;display:block;text-align:right;margin-top:8px;font-size:12px;line-height:1.35}
+
+/* Reaction text is story reading too; keep it comfortably readable. */
+.app[data-ui-mode="story"] .reaction-card .speaker{font-size:clamp(15px,1.2vw,18px)}
+.app[data-ui-mode="story"] .reaction-card .reaction-text{font-size:clamp(22px,1.9vw,29px);line-height:1.68}
+.app[data-ui-mode="story"] .reaction-card .primary{font-size:clamp(15px,1.2vw,18px);min-height:50px}
+
+/* Tight viewports: prefer scrolling to unreadably small type. */
+@media(orientation:landscape) and (max-height:520px){
+  .top-actions{flex-wrap:wrap;justify-content:flex-end;max-width:58vw;gap:4px}
+  .small{font-size:10px;min-height:34px;padding:5px 7px}
+  .b5-compass{top:51px}
+  .b5-compass span{font-size:9px;padding:3px 6px}
+  .app[data-ui-mode="coach"] .panel,
+  .app[data-ui-mode="review"] .panel,
+  .app[data-ui-mode="coach"] .panel.coach-large-panel,
+  .app[data-ui-mode="coach"] .panel.coach-large-panel.wide,
+  .app[data-ui-mode="coach"] .reaction-card,
+  .app[data-ui-mode="review"] .reaction-card{
+    top:82px;
+    max-height:calc(100dvh - 90px);
+    padding:12px 15px 16px;
+  }
+  .panel h2,.panel.coach-large-panel h2{font-size:22px;line-height:1.4;margin-bottom:7px}
+  .panel h3{font-size:17px}
+  .panel.coach-large-panel .coach-chip,.coach-chip,.review-chip,.task-block-label{font-size:11px;padding:4px 7px}
+  .choice,.panel.coach-large-panel .choice{font-size:14.5px;line-height:1.45;min-height:50px;padding:9px 10px}
+  .choice .num{width:24px;height:24px;font-size:11px}
+  .micro-feedback{font-size:13px;line-height:1.55;padding:9px 10px}
+  .compare-label{font-size:11px}.compare-main{font-size:14px;line-height:1.5}
+  .teaching-note{font-size:14px;line-height:1.55;padding:9px 11px}
+  .steps{grid-template-columns:1fr!important;gap:6px}
+  .steps>div{min-height:48px;padding:9px 10px;gap:8px}
+  .steps b{flex-basis:26px;height:26px;font-size:11px}
+  .steps span{font-size:14px;line-height:1.45}
+  .model-examples{grid-template-columns:1fr!important}
+  .model-examples div{font-size:14px;line-height:1.5;padding:9px 10px}
+  .model-line .who{font-size:11px}.model-line .say{font-size:14px;line-height:1.5}
+  .summary-cards,.summary-cards.five,.app[data-density="focus"] .ending-pair{grid-template-columns:1fr 1fr!important;gap:7px}
+  .summary-cards b{font-size:11px}.summary-cards span{font-size:13px;line-height:1.45}
+  .future-card p{font-size:14px;line-height:1.55}.future-kicker{font-size:11px}
+  .review-lead,.app[data-density="focus"] #reviewPanel .review-lead{font-size:14px;line-height:1.55}
+  .goal-learning-text{font-size:21px;line-height:1.42}
+  .goal-panel .goal-topic-row h2{font-size:18px;line-height:1.4}
+  .goal-panel .benefit-box,.goal-panel .future-mini{font-size:14px;line-height:1.55}
+  .task-page-nav{grid-template-columns:1fr auto;gap:8px 12px;margin-top:10px}
+  .task-page-indicator{font-size:11px}
+  .task-page-nav .primary,.primary{font-size:13px;min-height:42px;padding:8px 12px}
+  .app[data-ui-mode="story"] .dialogue{min-height:132px;padding:12px 16px 15px}
+  .app[data-ui-mode="story"] .dialogue .speaker{font-size:12px;min-height:23px}
+  .app[data-ui-mode="story"] .dialogue.story-line--narration .dialogue-text,
+  .app[data-ui-mode="story"] .transition-dialogue.story-line--narration .dialogue-text,
+  .app[data-ui-mode="story"] .dialogue.story-line--dialogue .dialogue-text,
+  .app[data-ui-mode="story"] .transition-dialogue.story-line--dialogue .dialogue-text{font-size:18px;line-height:1.55}
+  .app[data-ui-mode="story"] .dialogue.story-line--thought .dialogue-text,
+  .app[data-ui-mode="story"] .transition-dialogue.story-line--thought .dialogue-text{font-size:17px;line-height:1.55}
+  .tap-hint{font-size:10px;margin-top:5px}
+  .app[data-ui-mode="story"] .reaction-card .reaction-text{font-size:17px;line-height:1.55}
+}
+
+@media(max-width:760px){
+  .task-page-nav{grid-template-columns:1fr}
+  .task-page-nav .primary{justify-self:stretch;width:100%}
+  .choice-grid{grid-template-columns:1fr}
+}
+/* Match the same semantic colors inside the modeling dialogue. */
+.model-line--narration .say{color:var(--story-narration-text)!important}
+.model-line--dialogue .say{color:var(--story-dialogue-text)!important}
+.model-line--thought .say{color:var(--story-thought-text)!important}
+.lead{font-size:clamp(18px,1.45vw,22px);line-height:1.75}
+.panel{scrollbar-gutter:stable;overscroll-behavior:contain}
+@media(orientation:landscape) and (max-height:520px){.lead{font-size:14px;line-height:1.5}}
