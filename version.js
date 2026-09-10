@@ -1,1 +1,1 @@
-window.B5_PLAYER_VERSION='0.10.7';
+window.B5_PLAYER_VERSION='0.10.8';

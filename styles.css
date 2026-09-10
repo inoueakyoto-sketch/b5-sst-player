@@ -461,3 +461,18 @@ button,.primary,.ghost,.choice,.library-btn{
 .lead{font-size:clamp(18px,1.45vw,22px);line-height:1.75}
 .panel{scrollbar-gutter:stable;overscroll-behavior:contain}
 @media(orientation:landscape) and (max-height:520px){.lead{font-size:14px;line-height:1.5}}
+
+/* v0.10.8: ruby-first Japanese readability. Keep furigana above every kanji and
+   reserve enough vertical space so ruby never crowds the preceding line. */
+ruby{ruby-position:over;ruby-align:center;line-height:1.35}
+rt{font-size:.52em;font-weight:800;line-height:1;color:inherit;letter-spacing:.01em}
+.dialogue-text,.transition-dialogue .dialogue-text{line-height:1.92!important}
+.reaction-text{line-height:1.9!important}
+.choice,.panel p,.panel li,.teaching-note,.benefit-box,.future-mini,.micro-feedback,.compare-main,.steps span,.model-examples div,.model-line .say,.summary-cards span,.future-card p,.review-lead,.goal-learning-text{line-height:1.78}
+.panel h2,.panel h3,.center-card h1,.center-card h2{line-height:1.55}
+
+@media (max-height:560px){
+  .dialogue-text,.transition-dialogue .dialogue-text{line-height:1.78!important}
+  .reaction-text{line-height:1.76!important}
+  .choice,.panel p,.panel li,.teaching-note,.benefit-box,.future-mini,.micro-feedback,.compare-main,.steps span,.model-examples div,.model-line .say,.summary-cards span,.future-card p,.review-lead,.goal-learning-text{line-height:1.62}
+}
