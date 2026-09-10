@@ -27,3 +27,45 @@ assets/
 
 ## 配布
 Google Driveなどに `.sststory` を保存し、利用者はダウンロード後にB5 SST Playerの「ストーリーをついか」から読み込みます。
+
+## v0.10.5 Player backward-compatible display extensions
+
+### Story line type
+`modules[].intro[]` and `modules[].model.lines[]` may include optional display metadata:
+
+```json
+{
+  "speaker": "ナレーション",
+  "text": "[[予定|よてい]]が かわりました。",
+  "kind": "narration"
+}
+```
+
+`kind` values supported by Player:
+- `narration`
+- `dialogue`
+- `thought`
+
+If `kind` is omitted, Player falls back to:
+- speaker `ナレーション` -> narration
+- text beginning with `（` -> thought
+- otherwise -> dialogue
+
+### Transition lines
+For backward compatibility, `transitions[].lines[]` may be either a plain string or a structured line object.
+
+Plain string (legacy):
+```json
+"つぎの 展示へ 向かいました。"
+```
+
+Structured line (recommended when dialogue occurs in a bridge):
+```json
+{
+  "speaker": "れん",
+  "kind": "dialogue",
+  "text": "「[[中|なか]]にも ロケットが あるかもよ」"
+}
+```
+
+Narration and spoken dialogue should not be embedded in the same string when they need different presentation.

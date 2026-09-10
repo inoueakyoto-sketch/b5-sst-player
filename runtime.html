@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div id="app" class="app">
+<div id="app" class="app" data-density="focus">
   <div id="bgA" class="bg active"></div><div id="bgB" class="bg"></div><div class="shade"></div>
   <div id="rotateOverlay" class="rotate-overlay"><div class="rotate-card"><div class="rotate-icon">↻</div><div><ruby>画面<rt>がめん</rt></ruby>を<ruby>横向<rt>よこむ</rt></ruby>きにしてね</div></div></div>
 
@@ -32,22 +32,24 @@
   <main id="stage" class="stage">
     <section id="startPanel" class="center-card">
       <div id="storyEpisodeKicker" class="kicker"></div>
-      <h1 id="storyTitle"></h1><p id="storySubtitle" class="lead"></p><p id="storyGoal" class="solo-note"></p>
-      <div id="storyRoute" class="story-route"><span><ruby>朝<rt>あさ</rt></ruby>の<ruby>家<rt>いえ</rt></ruby></span><i>→</i><span><ruby>学校<rt>がっこう</rt></ruby>の<ruby>玄関<rt>げんかん</rt></ruby></span><i>→</i><span><ruby>教室<rt>きょうしつ</rt></ruby></span><i>→</i><span><ruby>校庭<rt>こうてい</rt></ruby></span><i>→</i><span><ruby>夕方<rt>ゆうがた</rt></ruby>の<ruby>家<rt>いえ</rt></ruby></span></div>
+      <h1 id="storyTitle"></h1><p id="storySubtitle" class="lead"></p><p id="storyGoal" class="solo-note hidden"></p>
+      <div id="storyRoute" class="story-route hidden"><span><ruby>朝<rt>あさ</rt></ruby>の<ruby>家<rt>いえ</rt></ruby></span><i>→</i><span><ruby>学校<rt>がっこう</rt></ruby>の<ruby>玄関<rt>げんかん</rt></ruby></span><i>→</i><span><ruby>教室<rt>きょうしつ</rt></ruby></span><i>→</i><span><ruby>校庭<rt>こうてい</rt></ruby></span><i>→</i><span><ruby>夕方<rt>ゆうがた</rt></ruby>の<ruby>家<rt>いえ</rt></ruby></span></div>
       <button id="startBtn" class="primary big" type="button"><ruby>物語<rt>ものがたり</rt></ruby>をはじめる</button>
     </section>
 
     <section id="goalPanel" class="panel wide coach-large-panel goal-panel hidden">
-      <div class="goal-learning-card">
-        <div class="goal-learning-label">これから<ruby>学<rt>まな</rt></ruby>ぶこと</div>
-        <div id="goalText" class="goal-learning-text"></div>
+      <div id="goalPrimaryBlock" class="task-page-block">
+        <div class="goal-learning-card">
+          <div class="goal-learning-label">これから<ruby>学<rt>まな</rt></ruby>ぶこと</div>
+          <div id="goalText" class="goal-learning-text"></div>
+        </div>
+        <div class="goal-topic-row"><div class="coach-chip">このSSTのテーマ</div><h2 id="goalTitle"></h2></div>
       </div>
-      <div class="goal-topic-row"><div class="coach-chip">このSSTのテーマ</div><h2 id="goalTitle"></h2></div>
-      <div class="goal-support-grid">
+      <div id="goalSupportBlock" class="goal-support-grid task-page-block hidden">
         <div class="goal-support-card benefit-card"><div class="goal-support-label">なぜ<ruby>大切<rt>たいせつ</rt></ruby>？</div><div id="goalBenefit" class="benefit-box"></div></div>
         <div class="goal-support-card future-card-mini"><div class="goal-support-label"><ruby>将来<rt>しょうらい</rt></ruby>どこで<ruby>使<rt>つか</rt></ruby>う？</div><div id="goalFuture" class="future-mini"></div></div>
       </div>
-      <button id="goalNext" class="primary goal-next-primary" type="button">このねらいで<ruby>場面<rt>ばめん</rt></ruby>を<ruby>見<rt>み</rt></ruby>る</button>
+      <div class="task-page-nav"><span id="goalPageIndicator" class="task-page-indicator"></span><button id="goalNext" class="primary goal-next-primary" type="button"></button></div>
     </section>
 
     <section id="dialoguePanel" class="dialogue hidden" tabindex="0">
@@ -75,7 +77,7 @@
     </section>
 
     <section id="reflectPanel" class="panel wide coach-large-panel reflect-panel hidden">
-      <div class="coach-chip">コーチ：「したかったこと」と「<ruby>伝<rt>つた</rt></ruby>わったこと」を<ruby>比<rt>くら</rt></ruby>べる</div><div class="compare-grid"><div class="compare-box"><div class="compare-label">ゆうとの「どうしたい？」</div><div id="wantSummary" class="compare-main"></div></div><div class="arrow">→</div><div class="compare-box"><div class="compare-label"><ruby>相手<rt>あいて</rt></ruby>に<ruby>起<rt>お</rt></ruby>きたこと</div><div id="impactSummary" class="compare-main"></div></div></div><div id="specificFeedback" class="teaching-note"></div><button id="reflectNext" class="primary" type="button"></button>
+      <div class="coach-chip">コーチ：「したかったこと」と「<ruby>伝<rt>つた</rt></ruby>わったこと」を<ruby>比<rt>くら</rt></ruby>べる</div><div id="reflectCompareBlock" class="compare-grid task-page-block"><div class="compare-box"><div class="compare-label">ゆうとの「どうしたい？」</div><div id="wantSummary" class="compare-main"></div></div><div class="arrow">→</div><div class="compare-box"><div class="compare-label"><ruby>相手<rt>あいて</rt></ruby>に<ruby>起<rt>お</rt></ruby>きたこと</div><div id="impactSummary" class="compare-main"></div></div></div><div id="reflectFeedbackBlock" class="task-page-block hidden"><div id="specificFeedback" class="teaching-note"></div></div><div class="task-page-nav"><span id="reflectPageIndicator" class="task-page-indicator"></span><button id="reflectNext" class="primary" type="button"></button></div>
     </section>
 
     <section id="repairChoicePanel" class="panel hidden">
@@ -87,7 +89,7 @@
     </section>
 
     <section id="modelPanel" class="panel wide coach-large-panel model-panel hidden">
-      <div class="coach-chip">モデリング：<ruby>実際<rt>じっさい</rt></ruby>のやりとりで<ruby>見本<rt>みほん</rt></ruby>を<ruby>見<rt>み</rt></ruby>る</div><h2 id="modelTitle"></h2><div class="model-scene"><img id="modelImage" alt=""><div id="modelDialogue" class="model-dialogue"></div></div><div id="modelSteps" class="steps"></div><div id="modelExamples" class="model-examples"></div><button id="retryBtn" class="primary" type="button">こんどは<ruby>自分<rt>じぶん</rt></ruby>で<ruby>練習<rt>れんしゅう</rt></ruby>する</button>
+      <div class="coach-chip">モデリング：<ruby>実際<rt>じっさい</rt></ruby>のやりとりで<ruby>見本<rt>みほん</rt></ruby>を<ruby>見<rt>み</rt></ruby>る</div><h2 id="modelTitle"></h2><div id="modelSceneBlock" class="model-scene task-page-block"><img id="modelImage" alt=""><div id="modelDialogue" class="model-dialogue"></div></div><div id="modelStepsBlock" class="task-page-block hidden"><div class="task-block-label">ポイント</div><div id="modelSteps" class="steps"></div></div><div id="modelExamplesBlock" class="task-page-block hidden"><div class="task-block-label"><ruby>言<rt>い</rt></ruby>い<ruby>方<rt>かた</rt></ruby>の<ruby>例<rt>れい</rt></ruby></div><div id="modelExamples" class="model-examples"></div></div><div class="task-page-nav"><span id="modelPageIndicator" class="task-page-indicator"></span><button id="retryBtn" class="primary" type="button"></button></div>
     </section>
 
 
@@ -95,8 +97,8 @@
       <div class="review-chip"><ruby>物語<rt>ものがたり</rt></ruby>のあとにする <ruby>振<rt>ふ</rt></ruby>り<ruby>返<rt>かえ</rt></ruby>り・<ruby>確認<rt>かくにん</rt></ruby></div>
       <h2 id="reviewHeading"></h2>
       <p class="review-lead">ここからは<ruby>物語<rt>ものがたり</rt></ruby>とは<ruby>別<rt>べつ</rt></ruby>の<ruby>練習<rt>れんしゅう</rt></ruby>です。<ruby>今日<rt>きょう</rt></ruby>の5つを<ruby>思<rt>おも</rt></ruby>い<ruby>出<rt>だ</rt></ruby>して、<ruby>違<rt>ちが</rt></ruby>う<ruby>場面<rt>ばめん</rt></ruby>でどうするか<ruby>試<rt>ため</rt></ruby>します。</p>
-      <div id="reviewSkills" class="summary-cards five"></div>
-      <div class="review-note">「これは○○のSST」とは<ruby>書<rt>か</rt></ruby>きません。<ruby>場面<rt>ばめん</rt></ruby>を<ruby>見<rt>み</rt></ruby>て、<ruby>自分<rt>じぶん</rt></ruby>で<ruby>考<rt>かんが</rt></ruby>えます。</div>
+      <div id="reviewSkills" class="summary-cards five hidden"></div>
+      <div class="review-note hidden">「これは○○のSST」とは<ruby>書<rt>か</rt></ruby>きません。<ruby>場面<rt>ばめん</rt></ruby>を<ruby>見<rt>み</rt></ruby>て、<ruby>自分<rt>じぶん</rt></ruby>で<ruby>考<rt>かんが</rt></ruby>えます。</div>
       <button id="reviewStart" class="primary" type="button"><ruby>違<rt>ちが</rt></ruby>う<ruby>場面<rt>ばめん</rt></ruby>で<ruby>試<rt>ため</rt></ruby>してみる</button>
     </section>
 
@@ -109,11 +111,15 @@
     </section>
 
     <section id="transitionPanel" class="dialogue transition-dialogue hidden" tabindex="0">
-      <div id="transitionKicker" class="story-tag"></div><div class="speaker">ナレーション</div><div id="transitionText" class="dialogue-text"></div><div id="transitionHint" class="tap-hint"></div>
+      <div id="transitionKicker" class="story-tag"></div><div id="transitionSpeaker" class="speaker">ナレーション</div><div id="transitionText" class="dialogue-text"></div><div id="transitionHint" class="tap-hint"></div>
     </section>
 
     <section id="endingPanel" class="panel wide hidden">
-      <div class="review-chip"><ruby>確認編<rt>かくにんへん</rt></ruby> おわり</div><h2>5つの<ruby>力<rt>ちから</rt></ruby>を、<ruby>違<rt>ちが</rt></ruby>う<ruby>場面<rt>ばめん</rt></ruby>でも<ruby>試<rt>ため</rt></ruby>しました</h2><div id="endingSkills" class="summary-cards five"></div><div class="future-card"><div class="future-kicker"><ruby>将来<rt>しょうらい</rt></ruby>へつながる<ruby>力<rt>ちから</rt></ruby></div><p><ruby>今日<rt>きょう</rt></ruby>の5つは、<ruby>大人<rt>おとな</rt></ruby>になって<ruby>働<rt>はたら</rt></ruby>くときの「<ruby>返事<rt>へんじ</rt></ruby>・チーム<ruby>参加<rt>さんか</rt></ruby>・<ruby>質問<rt>しつもん</rt></ruby>・<ruby>安全<rt>あんぜん</rt></ruby>・<ruby>相談<rt>そうだん</rt></ruby>」につながります。</p></div><h3><ruby>今日<rt>きょう</rt></ruby>、ほんとうの<ruby>生活<rt>せいかつ</rt></ruby>で1つだけ<ruby>試<rt>ため</rt></ruby>すなら？</h3><div id="missionGrid" class="choice-grid compact"></div><button id="missionSave" class="primary hidden" type="button">このミッションにする</button><button id="adultBtn" class="ghost" type="button"><ruby>大人<rt>おとな</rt></ruby><ruby>向<rt>む</rt></ruby>けの<ruby>学習記録<rt>がくしゅうきろく</rt></ruby></button><div id="adultRecord" class="adult-record hidden"></div>
+      <div class="review-chip"><ruby>確認編<rt>かくにんへん</rt></ruby> おわり</div>
+      <div id="endingRecapBlock" class="task-page-block"><h2>できたことを2つずつ<ruby>振<rt>ふ</rt></ruby>り<ruby>返<rt>かえ</rt></ruby>る</h2><div id="endingSkills" class="summary-cards ending-pair"></div></div>
+      <div id="endingFutureBlock" class="task-page-block hidden"><div class="future-card"><div class="future-kicker"><ruby>将来<rt>しょうらい</rt></ruby>へつながる<ruby>力<rt>ちから</rt></ruby></div><p id="endingFutureSummary"></p></div></div>
+      <div id="endingMissionBlock" class="task-page-block hidden"><h3><ruby>今日<rt>きょう</rt></ruby>、ほんとうの<ruby>生活<rt>せいかつ</rt></ruby>で1つだけ<ruby>試<rt>ため</rt></ruby>すなら？</h3><div id="missionGrid" class="choice-grid compact"></div><button id="missionSave" class="primary hidden" type="button">このミッションにする</button><button id="adultBtn" class="ghost" type="button"><ruby>大人<rt>おとな</rt></ruby><ruby>向<rt>む</rt></ruby>けの<ruby>学習記録<rt>がくしゅうきろく</rt></ruby></button><div id="adultRecord" class="adult-record hidden"></div></div>
+      <div class="task-page-nav"><span id="endingPageIndicator" class="task-page-indicator"></span><button id="endingNext" class="primary" type="button"></button></div>
     </section>
 
     <section id="savedPanel" class="center-card hidden"><div class="kicker"><ruby>現実<rt>げんじつ</rt></ruby>ミッション</div><h2 id="savedMission"></h2><p>チャンスがあったら1<ruby>回<rt>かい</rt></ruby>だけ<ruby>試<rt>ため</rt></ruby>します。うまくいかなくても、つぎの<ruby>練習<rt>れんしゅう</rt></ruby>の<ruby>材料<rt>ざいりょう</rt></ruby>になります。</p><button id="finishBtn" class="primary" type="button"><ruby>今日<rt>きょう</rt></ruby>はここまで</button></section>
